@@ -146,6 +146,42 @@ def seed_database():
                 "immediate_action": "See a doctor for blood tests. Increase iron-rich foods. Do not self-diagnose as anemia has multiple causes requiring different treatments.",
                 "medications": "Iron supplements, vitamin B12 supplements, folic acid. Treatment depends on the type of anemia. Must be guided by a doctor.",
             },
+            {
+                "name": "HIV / AIDS",
+                "description": "Human Immunodeficiency Virus (HIV) attacks the immune system, specifically CD4 cells. If untreated, it can progress to Acquired Immunodeficiency Syndrome (AIDS), the most advanced stage. Early detection and treatment allow people with HIV to live long, healthy lives.",
+                "causes": "Unprotected sexual contact, sharing needles or syringes, mother-to-child transmission during pregnancy/birth/breastfeeding, contaminated blood transfusions",
+                "prevention": "Use condoms consistently, practice safe needle use, get tested regularly, take PrEP (pre-exposure prophylaxis) if at high risk, avoid sharing personal items that may have blood",
+                "symptoms": ["Fever", "Fatigue", "Swollen Lymph Nodes", "Sore Throat", "Rash", "Night Sweats", "Weight Loss", "Muscle Pain", "Headache", "Mouth Ulcers", "Diarrhea", "Chills"],
+                "immediate_action": "Get tested at a healthcare facility immediately if you suspect exposure. Post-exposure prophylaxis (PEP) can prevent infection if started within 72 hours. Seek medical care urgently.",
+                "medications": "Antiretroviral therapy (ART) — combination of drugs like tenofovir, emtricitabine, dolutegravir. Must be prescribed and monitored by a specialist. Early treatment is critical.",
+            },
+            {
+                "name": "Cystitis (Bladder Infection)",
+                "description": "Inflammation of the bladder, usually caused by a bacterial infection. It is the most common type of urinary tract infection (UTI), especially in women. Causes discomfort and urinary symptoms.",
+                "causes": "Bacterial infection (E. coli most common), sexual activity, use of diaphragms or spermicides, menopause, prolonged urine retention, poor hygiene",
+                "prevention": "Drink plenty of water, urinate after intercourse, wipe front to back, avoid irritating feminine hygiene products, wear cotton underwear, don't hold urine for long periods",
+                "symptoms": ["Frequent Urination", "Burning Sensation When Urinating", "Lower Abdominal Pain", "Cloudy Urine", "Strong-Smelling Urine", "Pelvic Pressure", "Blood in Urine", "Mild Fever"],
+                "immediate_action": "Drink plenty of water to flush bacteria. See a doctor for urine testing and antibiotics. Apply a warm heating pad to the lower abdomen for pain relief.",
+                "medications": "Antibiotics (nitrofurantoin, trimethoprim-sulfamethoxazole, fosfomycin) as prescribed. Phenazopyridine for pain relief. Complete full antibiotic course.",
+            },
+            {
+                "name": "Urethritis (Urethra Infection)",
+                "description": "Inflammation of the urethra, the tube that carries urine from the bladder to the outside of the body. Often caused by sexually transmitted infections (STIs) such as chlamydia or gonorrhea.",
+                "causes": "Sexually transmitted infections (chlamydia, gonorrhea, herpes), bacterial infection, injury or irritation from catheters or spermicides, chemical sensitivity",
+                "prevention": "Practice safe sex with condoms, get regular STI screenings, avoid irritating chemicals near the urethra, maintain good genital hygiene, urinate after intercourse",
+                "symptoms": ["Burning Sensation When Urinating", "Urethral Discharge", "Frequent Urination", "Itching at Urethra Opening", "Pelvic Pain", "Blood in Urine", "Swelling of Urethra"],
+                "immediate_action": "See a doctor for STI testing and urine analysis. Avoid sexual contact until treated. Drink plenty of water. Both partners should be treated if an STI is confirmed.",
+                "medications": "Antibiotics based on the cause — azithromycin or doxycycline for chlamydia, ceftriaxone for gonorrhea, antivirals for herpes. Must be prescribed by a doctor.",
+            },
+            {
+                "name": "Pyelonephritis (Kidney Infection)",
+                "description": "A serious type of urinary tract infection that has spread to one or both kidneys. It requires prompt medical treatment as it can lead to permanent kidney damage or sepsis if left untreated.",
+                "causes": "Untreated lower UTI spreading upward, kidney stones blocking urine flow, vesicoureteral reflux (urine flowing backward), weakened immune system, pregnancy, catheter use",
+                "prevention": "Treat lower UTIs promptly, drink plenty of water, don't hold urine for long periods, manage kidney stones, practice good hygiene, seek care during pregnancy for any urinary symptoms",
+                "symptoms": ["High Fever", "Chills", "Flank Pain", "Lower Abdominal Pain", "Burning Sensation When Urinating", "Frequent Urination", "Nausea", "Vomiting", "Cloudy Urine", "Blood in Urine", "Fatigue", "Confusion"],
+                "immediate_action": "Seek emergency medical care immediately. Kidney infections can become life-threatening. Do not attempt to treat at home. Hospitalization and IV antibiotics may be required.",
+                "medications": "IV antibiotics (ciprofloxacin, ceftriaxone, piperacillin-tazobactam) in severe cases. Oral antibiotics (ciprofloxacin, levofloxacin) for mild cases. Must be managed by a doctor.",
+            },
         ]
 
         for disease_data in diseases_data:
