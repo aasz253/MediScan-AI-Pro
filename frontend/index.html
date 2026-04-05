@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediScan AI Pro – Hybrid Disease Identifier</title>
+    <meta name="description" content="AI-powered hybrid disease identifier that works offline and online">
+    <meta name="theme-color" content="#6C63FF">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo" onclick="navigateTo('home')">
+                    <i class="fas fa-heartbeat logo-icon"></i>
+                    <span class="logo-text">MediScan <span class="accent">AI Pro</span></span>
+                </div>
+                <nav class="nav" id="mainNav">
+                    <a href="#" class="nav-link active" data-page="home" onclick="navigateTo('home')">
+                        <i class="fas fa-stethoscope"></i><span class="nav-text">Symptom Checker</span>
+                    </a>
+                    <a href="#" class="nav-link" data-page="results" onclick="navigateTo('results')">
+                        <i class="fas fa-chart-bar"></i><span class="nav-text">Results</span>
+                    </a>
+                    <a href="#" class="nav-link" data-page="library" onclick="navigateTo('library')">
+                        <i class="fas fa-book-medical"></i><span class="nav-text">Disease Library</span>
+                    </a>
+                    <a href="#" class="nav-link" data-page="assistant" onclick="navigateTo('assistant')">
+                        <i class="fas fa-robot"></i><span class="nav-text">AI Assistant</span>
+                    </a>
+                    <a href="#" class="nav-link" data-page="dashboard" onclick="navigateTo('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i><span class="nav-text">Dashboard</span>
+                    </a>
+                </nav>
+                <div class="header-actions">
+                    <div class="mode-indicator" id="modeIndicator">
+                        <span class="mode-dot offline"></span>
+                        <span class="mode-text">Offline</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section id="page-home" class="page active">
+                <div class="disclaimer-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>This application does NOT provide medical diagnosis. Always consult a licensed medical professional.</p>
+                </div>
+
+                <div class="hero-section">
+                    <h1 class="hero-title">Symptom Checker</h1>
+                    <p class="hero-subtitle">Select your symptoms below to get possible condition insights</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="symptomSearch" placeholder="Search symptoms..." oninput="filterSymptoms(this.value)">
+                    </div>
+                </div>
+
+                <div class="symptoms-grid" id="symptomsGrid">
+                    <div class="loading-spinner"><div class="spinner"></div><p>Loading symptoms...</p></div>
+                </div>
+
+                <div class="selected-symptoms" id="selectedSymptoms">
+                    <h3><i class="fas fa-check-circle"></i> Selected Symptoms (<span id="symptomCount">0</span>)</h3>
+                    <div class="selected-tags" id="selectedTags"></div>
+                    <button class="btn btn-primary btn-lg" id="analyzeBtn" onclick="analyzeSymptoms()" disabled>
+                        <i class="fas fa-microscope"></i> Analyze Symptoms
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-results" class="page">
+                <div class="disclaimer-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Results are for informational purposes only. Always consult a licensed medical professional.</p>
+                </div>
+
+                <div class="results-header">
+                    <h1><i class="fas fa-chart-pie"></i> Analysis Results</h1>
+                    <p class="subtitle">Possible Conditions based on your symptoms</p>
+                </div>
+
+                <div id="resultsContent">
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No Results Yet</h3>
+                        <p>Go to the Symptom Checker and analyze your symptoms first.</p>
+                        <button class="btn btn-primary" onclick="navigateTo('home')">
+                            <i class="fas fa-stethoscope"></i> Check Symptoms
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-library" class="page">
+                <div class="disclaimer-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Information is for educational purposes only. Not a substitute for professional medical advice.</p>
+                </div>
+
+                <div class="library-header">
+                    <h1><i class="fas fa-book-medical"></i> Disease Library</h1>
+                    <p class="subtitle">Browse and learn about various health conditions</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="diseaseSearch" placeholder="Search diseases..." oninput="searchDiseases(this.value)">
+                    </div>
+                </div>
+
+                <div class="diseases-list" id="diseasesList">
+                    <div class="loading-spinner"><div class="spinner"></div><p>Loading diseases...</p></div>
+                </div>
+            </section>
+
+            <section id="page-assistant" class="page">
+                <div class="disclaimer-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>AI responses are for general information only. Always consult a licensed medical professional for diagnosis.</p>
+                </div>
+
+                <div class="assistant-header">
+                    <h1><i class="fas fa-robot"></i> AI Medical Assistant</h1>
+                    <p class="subtitle">Ask health-related questions and get AI-powered explanations</p>
+                    <span class="status-badge" id="aiStatus">Checking availability...</span>
+                </div>
+
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                            <div class="message-content">
+                                <p>Hello! I'm your AI medical information assistant. I can help explain diseases, symptoms, and general health information.</p>
+                                <p class="disclaimer-note"><i class="fas fa-info-circle"></i> Remember: I do NOT provide medical diagnosis. Always consult a doctor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Ask a health question..." onkeypress="handleChatKeypress(event)">
+                        <button class="btn btn-primary" id="sendBtn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-dashboard" class="page">
+                <div class="disclaimer-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Risk assessments are estimates only. They do NOT replace professional medical evaluation.</p>
+                </div>
+
+                <div class="dashboard-header">
+                    <h1><i class="fas fa-tachometer-alt"></i> Risk Insights Dashboard</h1>
+                    <p class="subtitle">Location-based disease risk assessment and smart alerts</p>
+                </div>
+
+                <div class="location-controls">
+                    <button class="btn btn-primary" onclick="getLocationAndAssess()">
+                        <i class="fas fa-map-marker-alt"></i> Use My Location
+                    </button>
+                    <div class="manual-location">
+                        <input type="number" id="manualLat" placeholder="Latitude" step="any">
+                        <input type="number" id="manualLon" placeholder="Longitude" step="any">
+                        <button class="btn btn-secondary" onclick="manualLocationAssess()">
+                            <i class="fas fa-search"></i> Assess
+                        </button>
+                    </div>
+                </div>
+
+                <div id="dashboardContent">
+                    <div class="empty-state">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>Location-Based Risk Assessment</h3>
+                        <p>Enable location access or enter coordinates to see disease risk data for your area.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediScan AI Pro</span>
+                </div>
+                <p class="footer-disclaimer">This application does NOT provide medical diagnosis. Always consult a licensed medical professional.</p>
+                <p class="footer-copy">&copy; 2026 SifunaCodex</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="diseaseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Disease Details</h2>
+                <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
